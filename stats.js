@@ -8,7 +8,8 @@ var dgram      = require('dgram')
   , async      = require('async')
   , url_parse  = require('url').parse
   , https      = require('https')
-  , http       = require('http');
+  , http       = require('http')
+  , tunnel     = require('tunnel');
 
 var logger = function(message,severity){
   switch(severity){
@@ -405,6 +406,15 @@ config.configFile(process.argv[2], function (config, oldConfig) {
             "User-Agent" : versionstring
           }
         };
+
+        if (config.proxyHost && config.proxyPort) {
+          options.agent = tunnel.httpsOverHttp({
+            proxy: {
+              host: config.proxyHost,
+              port: config.proxyPort
+            }
+          });
+        }
 
         var proto = http;
         if ((parsed_host["protocol"] || 'http:').match(/https/)){

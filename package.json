@@ -20,7 +20,8 @@
   "dependencies": {
     "async": "0.1.x",
     "underscore": "1.2.x",
-    "temp": "0.4.x"
+    "temp": "0.4.x",
+    "tunnel": "0.0.1"
   },
   "devDependencies": {
     "nodeunit": "0.6.x"
